@@ -48,6 +48,6 @@ if (typeof(argv['o']) !== 'undefined') {
 var html = readFile(inFilePath);
 
 var doc = new scopeContext.JSDOM(html).window.document;
-var article = new scopeContext.Readability(doc).parse();
+var article = new scopeContext.Readability(doc, options={debug: true}).parse();
 
 writeFile(JSON.stringify(article), outFilePath);
