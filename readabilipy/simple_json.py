@@ -54,7 +54,7 @@ def simple_json_from_html_string(html, content_digests=False, node_indexes=False
 
             with chdir(jsdir):
                 o = subprocess.check_output(["node", "ExtractArticle.js", "-i", html_path, "-o", json_path])
-            logger.info(o)
+            logger.info(o.decode())
 
             with open(json_path, 'r') as json_file:
                 input_json = json.load(json_file)
