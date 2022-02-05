@@ -4,6 +4,9 @@ import os
 import tempfile
 import subprocess
 import sys
+import logging
+
+logger = logging.getLogger()
 
 from bs4 import BeautifulSoup
 from bs4.element import Comment, NavigableString, CData
@@ -50,7 +53,8 @@ def simple_json_from_html_string(html, content_digests=False, node_indexes=False
             jsdir = os.path.join(os.path.dirname(__file__), 'javascript')
 
             with chdir(jsdir):
-                subprocess.check_call(["node", "ExtractArticle.js", "-i", html_path, "-o", json_path])
+                o = subprocess.check_output(["node", "ExtractArticle.js", "-i", html_path, "-o", json_path])
+            logger.info(o)
 
             with open(json_path, 'r') as json_file:
                 input_json = json.load(json_file)
