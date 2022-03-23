@@ -37,7 +37,7 @@ def have_node():
     return os.path.exists(node_modules)
 
 
-def simple_json_from_html_string(html, content_digests=False, node_indexes=False, use_readability=False):
+def simple_json_from_html_string(html, content_digests=False, node_indexes=False, use_readability=False, log=False):
     if use_readability and not have_node():
         print("Warning: node executable not found, reverting to pure-Python mode. Install Node.js v10 or newer to use Readability.js.", file=sys.stderr)
         use_readability = False
@@ -54,7 +54,8 @@ def simple_json_from_html_string(html, content_digests=False, node_indexes=False
 
             with chdir(jsdir):
                 o = subprocess.check_output(["node", "ExtractArticle.js", "-i", html_path, "-o", json_path])
-            logger.info(o.decode())
+            if log:
+                logger.info(o.decode())
 
             with open(json_path, 'r') as json_file:
                 input_json = json.load(json_file)
