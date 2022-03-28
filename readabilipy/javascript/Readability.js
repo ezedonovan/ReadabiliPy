@@ -1224,7 +1224,9 @@ Readability.prototype = {
             // so we can match below.
             name = matches[i].toLowerCase().replace(/\s/g, "");
             // multiple authors
-            values[name] = content.trim();
+            if(content != null){
+              values[name] = content.trim();
+            }
           }
         }
       }
@@ -1234,7 +1236,9 @@ Readability.prototype = {
           // Convert to lowercase, remove any whitespace, and convert dots
           // to colons so we can match below.
           name = name.toLowerCase().replace(/\s/g, "").replace(/\./g, ":");
-          values[name] = content.trim();
+          if(content != null){
+            values[name] = content.trim();
+          }
         }
       }
     });
